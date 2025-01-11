@@ -11,7 +11,7 @@ def home():
     return "Bot is running!"
 
 def run():
-    port = int(os.environ.get("PORT", 5000))  # Heroku assigns a dynamic port
+    port = int(os.environ.get("PORT", 5000))  # Render assigns a dynamic port
     app.run(host="0.0.0.0", port=port)
 
 def keep_alive():
@@ -33,7 +33,8 @@ async def on_ready():
 async def on_message(message):
     if message.author == bot.user:
         return
-    if "Yunna" not in message.content and "Rurui" not in message.content:
+    # Case-insensitive check for the keyword "Yunna"
+    if "yunna" not in message.content.lower():
         await message.delete()
 
 keep_alive()
